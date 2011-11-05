@@ -65,9 +65,9 @@ sierpinskiFrame frameTime
 
 -- Creates, shows and runs the windows and the animation loop.
 main = animateInWindow
-           "Sierpinski Triangle" -- window title
-           (800, 600)            -- window size
-           (10, 10)              -- window position
-           black                 -- background color
-           sierpinskiFrame       -- picture to display based on frameTime
+    "Sierpinski Triangle" -- window title
+    (800, 600)            -- window size
+    (10, 10)              -- window position
+    black                 -- background color
+    sierpinskiFrame       -- picture to display based on frameTime
         
