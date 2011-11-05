@@ -29,13 +29,13 @@ splitTriangle tri@(a, b, c) = ((a, ab, ac), (ab, b, bc), (ac, bc, c))
 sierpinski :: Integer -> Triangle -> [Triangle]
 sierpinski 0 _ = []
 sierpinski n tri = (middleTriangle tri) : (sierpinski nextN t1) ++ (sierpinski nextN t2) ++ (sierpinski nextN t3)
-    where (t1, t2, t3)  = splitTriangle tri
-          nextN = n - 1
+    where (t1, t2, t3) = splitTriangle tri
+          nextN        = n - 1
   
 -- Returns the iteration time for the given frame time. Used for animation.
 timeToIteration frameTime = (round $ frameTime * animSpeed) `mod` maxIteration
     where maxIteration = 10
-          animSpeed = 2.0
+          animSpeed    = 2.0
   
   
 --  
@@ -46,7 +46,7 @@ timeToIteration frameTime = (round $ frameTime * animSpeed) `mod` maxIteration
 drawTriangle :: Color -> Triangle -> Picture
 drawTriangle color (a, b, c)
     = Color color
-	$ Polygon [a, b, c]
+    $ Polygon [a, b, c]
 
 -- Combines the given same-colored triangles into a single picture.
 trisToPicture :: Color -> [Triangle] -> Picture
@@ -59,15 +59,15 @@ drawSierpinski n tri =
 -- Draws a single frame of the sierpinski animation. 
 -- The shown iteration-depth is based on the current frameTime.
 sierpinskiFrame frameTime	
-	= Translate (-250) (-150)
-	$ Scale 5.0 5.0
+    = Translate (-250) (-150)
+    $ Scale 5.0 5.0
     $ drawSierpinski (timeToIteration frameTime) ((0,0), (100, 0), (50,75))
 
 -- Creates, shows and runs the windows and the animation loop.
 main = animateInWindow  
        "Sierpinski Triangle" 	-- window title
-           (800, 600) 		    -- window size
-           (10, 10) 		    -- window position
-           black			    -- background color
-           sierpinskiFrame		-- picture to display based on frameTime
+       (800, 600)               -- window size
+       (10, 10)                 -- window position
+       black                    -- background color
+       sierpinskiFrame          -- picture to display based on frameTime
         
