@@ -64,10 +64,10 @@ sierpinskiFrame frameTime
     $ drawSierpinski (timeToIteration frameTime) ((0,0), (100, 0), (50,75))
 
 -- Creates, shows and runs the windows and the animation loop.
-main = animateInWindow  
-       "Sierpinski Triangle" 	-- window title
-       (800, 600)               -- window size
-       (10, 10)                 -- window position
-       black                    -- background color
-       sierpinskiFrame          -- picture to display based on frameTime
+main = animateInWindow
+           "Sierpinski Triangle" -- window title
+           (800, 600)            -- window size
+           (10, 10)              -- window position
+           black                 -- background color
+           sierpinskiFrame       -- picture to display based on frameTime
         
