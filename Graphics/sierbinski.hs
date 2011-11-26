@@ -6,13 +6,14 @@
 --
 
 import Graphics.Gloss
+import Graphics.Gloss.Data.Point
   
 --
 -- Pure Code
 --
 
 -- Represents a triangle with the Points A, B and C
-type Triangle = ((Float, Float), (Float, Float), (Float, Float))
+type Triangle = (Point, Point, Point)
 
 -- Creates the smaller triangle inside the given triangle.
 middleTriangle :: Triangle -> Triangle
