@@ -12,7 +12,8 @@ mode xs = head . last $ sortBy (compare `on` length) (groupBy (==) xs)
 
 -- The variance is a measure of how far a set of numbers is spread out
 variance :: (RealFrac a, Fractional b) => [a] -> b
-variance xs = mean $ map ((^2) . subtract (mean xs)) xs
+variance = mean . distancesFromMean where 
+    distancesFromMean xs = map ((^2) . subtract (mean xs)) xs
 
 stddev :: RealFloat a => [a] -> a
 stddev = sqrt . variance
@@ -42,19 +43,19 @@ gaussian x mu sigma = 1.0 / sigma * probDensity ((x - mu) / sigma)
 
 -- Measures how much two random variables change together.
 -- covariance xs xs = variance xs
-covariance :: (RealFrac a, Fractional a) => [a] -> [a] -> a
+covariance :: RealFrac a => [a] -> [a] -> a
 covariance xs ys = mean $ map distance (zip xs ys)
                    where xmu = mean xs
                          ymu = mean ys
                          distance (x, y) = (x-xmu)*(y-ymu)
 
 -- Pearson's product-moment coefficient r                       
-correlation xs ys = (covariance xs ys) / stddev(xs) * stddev(ys)
+correlation xs ys = covariance xs ys / (stddev xs * stddev ys)
           
 -- Gets the slope b of the linear regression line through the data.
-slope xs ys = (covariance xs ys) / variance ys
+--  (sum $ distancesFromMean2 xs ys) / (sum $ distancesFromMean ys)
+slope xs ys = (covariance xs ys) / variance xs
 
 -- Gets the intercept a of the linear regression line through the data.
 intercept xs ys = mean ys - (b * mean xs) 
                   where b = slope xs ys
-		  
