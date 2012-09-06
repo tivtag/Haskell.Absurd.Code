@@ -59,3 +59,6 @@ slope xs ys = (covariance xs ys) / variance xs
 -- Gets the intercept a of the linear regression line through the data.
 intercept xs ys = mean ys - (b * mean xs) 
                   where b = slope xs ys
+
+-- Gets the size of the confidence interval using -- the t-Distribution value [tfactor].
+confinv xs tfactor = tfactor * (stddev xs / (sqrt (genericLength xs)))
